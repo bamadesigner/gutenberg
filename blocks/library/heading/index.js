@@ -79,6 +79,19 @@ registerBlockType( 'core/heading', {
 					} );
 				},
 			},
+			...'23456'.split( '' ).map( ( level ) => ( {
+				type: 'shortcut',
+				blocks: [ 'core/paragraph' ],
+				shortcut: level,
+				transform( blockAttributes ) {
+					return blockAttributes.map( ( { content } ) => {
+						return createBlock( 'core/heading', {
+							nodeName: `H${ level }`,
+							content,
+						} );
+					} );
+				},
+			} ) ),
 		],
 		to: [
 			{
@@ -90,6 +103,24 @@ registerBlockType( 'core/heading', {
 					} );
 				},
 			},
+			...'23456'.split( '' ).map( ( level ) => ( {
+				type: 'shortcut',
+				shortcut: level,
+				transform( blockAttributes ) {
+					return blockAttributes.map( ( { content, nodeName } ) => {
+						if ( nodeName === `H${ level }` ) {
+							return createBlock( 'core/paragraph', {
+								content,
+							} );
+						} else {
+							return createBlock( 'core/heading', {
+								nodeName: `H${ level }`,
+								content,
+							} );
+						}
+					} );
+				},
+			} ) ),
 		],
 	},
 
