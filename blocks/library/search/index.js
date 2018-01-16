@@ -52,11 +52,12 @@ class SearchBlock extends Component {
 		return [
 			<form
 				role="search"
+				method="get"
 				className="search-form"
 				onSubmit= { this.handleFormSubmit }
 			>
 				<label>
-					<span className="search-label">{ label }</span>
+					<span className="screen-reader-text">{ label }</span>
 					<input type="search" className="search-field" placeholder={ placeholder } value="" name="s" />
 				</label>
 				<input type="submit" className="search-submit" value={ submitValue } />
@@ -75,11 +76,11 @@ class SearchBlock extends Component {
 const searchAttributes = {
 	label: {
 		type: 'string',
-		default: __( 'Search' ),
+		default: _x( 'Search for:', 'label' ),
 	},
 	placeholder: {
 		type: 'string',
-		default: __( 'Enter a search keyword or phrase' ),
+		default: _x( 'Search &hellip;', 'placeholder' ),
 	},
 	submitValue: {
 		type: 'string',
